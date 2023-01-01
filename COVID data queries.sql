@@ -9,7 +9,7 @@ Queries for Tableau Project
 
 Select SUM(new_cases) as total_cases, SUM(cast(new_deaths as int)) as total_deaths, SUM(cast(new_deaths as int))/SUM(new_cases)*100 as DeathPercentage
 From PortfolioProject..CovidDeaths
-Where continent is not null
+Where continent is not null;
 
 
 --2.
@@ -19,7 +19,7 @@ From PortfolioProject..CovidDeaths
 Where continent is null 
 and location not in ('World', 'European Union', 'International', 'Upper middle income', 'High income','Lower middle income', 'Low income')
 Group by location
-Order by TotalDeathCount desc
+Order by TotalDeathCount desc;
 
 
 --3.
@@ -27,7 +27,7 @@ Order by TotalDeathCount desc
 Select Location, Population, MAX(total_cases) as HighestInfectionCount, Max((total_cases/population))*100 as PercentPopulationInfected
 From PortfolioProject..CovidDeaths
 Group by Location, Population
-Order by PercentPopulationInfected desc
+Order by PercentPopulationInfected desc;
 
 
 --4.
@@ -35,7 +35,7 @@ Order by PercentPopulationInfected desc
 Select Location, Population,date, MAX(total_cases) as HighestInfectionCount, Max((total_cases/population))*100 as PercentPopulationInfected
 From PortfolioProject..CovidDeaths
 Group by Location, Population, date
-Order by PercentPopulationInfected desc
+Order by PercentPopulationInfected desc;
 
 
 --5.
@@ -47,7 +47,7 @@ Join PortfolioProject..CovidVaccinations vac
 	and dea.date = vac.date
 Where dea.continent is not null 
 Group by dea.continent, dea.location, dea.date, dea.population
-Order by 1,2,3
+Order by 1,2,3;
 
 
 --6.
@@ -55,7 +55,7 @@ Order by 1,2,3
 Select Location, date, population, total_cases, total_deaths
 From PortfolioProject..CovidDeaths
 where continent is not null 
-order by 1,2
+order by 1,2;
 
 
 --7.
@@ -72,4 +72,4 @@ Join PortfolioProject..CovidVaccinations vac
 where dea.continent is not null
 )
 Select *, (RollingPeopleVaccinated/Population)*100 as PercentPeopleVaccinated
-From PopvsVac
+From PopvsVac;
